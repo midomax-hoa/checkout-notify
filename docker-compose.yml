@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  zalo-payment-test-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zalo-payment-test-api
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - ZALO_MINIAPP_CHECKOUT_PRIVATE_KEY=${ZALO_MINIAPP_CHECKOUT_PRIVATE_KEY:-mock_private_key_123456}
+    restart: always

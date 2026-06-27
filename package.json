@@ -1,0 +1,21 @@
+{
+  "name": "zalo-payment-test",
+  "version": "1.0.0",
+  "description": "Small test API for handleZaloPaymentNotify",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.8",
+    "dotenv": "^16.4.5",
+    "hono": "^4.6.14"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  }
+}
