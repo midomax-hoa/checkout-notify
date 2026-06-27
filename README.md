@@ -99,3 +99,26 @@ Use this endpoint to sign any payload using the configured private key.
       "returnMessage": "Invalid mac"
     }
     ```
+
+---
+
+## Dokploy Deployment
+
+To deploy this service on Dokploy:
+
+### Option 1: Docker Compose Deployment (Recommended)
+This method integrates directly with Dokploy's Traefik reverse proxy.
+1. Create a new **Compose** application in the Dokploy dashboard.
+2. Select your repository and point the path to [docker-compose.prd.yml](file:///d:/Project/zbs-zma/zalo-payment-test/docker-compose.prd.yml).
+3. Set the following Environment Variables in the Dokploy environment config:
+   - `DOMAIN`: Your deployment domain (e.g., `notify-checkout.midomax.vn`).
+   - `ZALO_MINIAPP_CHECKOUT_PRIVATE_KEY`: Your real Zalo Mini App checkout private key.
+
+### Option 2: Dockerfile / Standalone Application Deployment
+1. Create an **Application** in Dokploy.
+2. Link your Git repository.
+3. Select **Dockerfile** as the build provider.
+4. Set the **Destination Port** to `3000` (matches the Hono container listen port).
+5. Add the environment variables:
+   - `ZALO_MINIAPP_CHECKOUT_PRIVATE_KEY`: your Zalo private key.
+
