@@ -178,8 +178,10 @@ app.post('/payment/mock-sign', async (c) => {
 
 const port = Number(process.env.PORT || 3000)
 logInfo(`Starting Zalo Payment Notify Test server on port ${port}...`)
-
 serve({
   fetch: app.fetch,
-  port
+  port,
+  hostname: '0.0.0.0'
 })
+
+

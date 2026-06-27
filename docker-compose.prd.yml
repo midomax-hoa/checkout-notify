@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  zalo-payment-test-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zalo-payment-test-api
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+    environment:
+      - PORT=3000
+      - ZALO_MINIAPP_CHECKOUT_PRIVATE_KEY=${ZALO_MINIAPP_CHECKOUT_PRIVATE_KEY}
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.zalo-payment-test-api.rule=Host(`${DOMAIN:-notify-checkout.midomax.vn}`)'
+      - 'traefik.http.routers.zalo-payment-test-api.entrypoints=websecure'
+      - 'traefik.http.routers.zalo-payment-test-api.tls=true'
+      - 'traefik.http.services.zalo-payment-test-api.loadbalancer.server.port=3000'
+      - 'traefik.http.routers.zalo-payment-test-api.priority=100'
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
